@@ -23,6 +23,7 @@ body {
     align-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 20px;
+    overflow-x: hidden;
 }
 
 .celtic-border {
@@ -186,6 +187,45 @@ body {
     font-size: 1.2rem;
 }
 
+/* Mobile controls */
+.mobile-controls {
+    display: none;
+    margin-top: 20px;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.controls-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.control-btn {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(180deg, var(--celtic-green) 0%, #1e3d1a 100%);
+    border: 2px solid var(--celtic-gold);
+    border-radius: 10px;
+    color: var(--celtic-gold);
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    touch-action: none;
+}
+
+.control-btn:active {
+    background: linear-gradient(180deg, #3a7a32 0%, var(--celtic-green) 100%);
+    transform: scale(0.95);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
 /* Mobile responsiveness */
 @media (max-width: 480px) {
     .game-title {
@@ -206,5 +246,26 @@ body {
     .legend-items {
         flex-direction: column;
         gap: 10px;
+    }
+    
+    .mobile-controls {
+        display: block;
+    }
+    
+    .control-btn {
+        width: 70px;
+        height: 70px;
+        font-size: 2rem;
+    }
+    
+    .controls-info {
+        font-size: 0.85rem;
+    }
+}
+
+/* Touch device optimization */
+@media (hover: none) and (pointer: coarse) {
+    .mobile-controls {
+        display: block;
     }
 }

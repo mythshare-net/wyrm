@@ -40,6 +40,11 @@ let score = 0;
 let gameLoop = null;
 let isGameRunning = false;
 
+// Touch control state
+let touchStartX = 0;
+let touchStartY = 0;
+const SWIPE_THRESHOLD = 30; // minimum distance for swipe
+
 // Initialize the game
 function init() {
     canvas = document.getElementById('gameCanvas');
@@ -49,6 +54,14 @@ function init() {
     document.getElementById('startBtn').addEventListener('click', startGame);
     document.getElementById('restartBtn').addEventListener('click', restartGame);
     document.addEventListener('keydown', handleKeyPress);
+    
+    // Touch controls for swipe gestures
+    canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+    canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+    canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
+    
+    // On-screen button controls
+    setupOnScreenControls();
     
     // Draw initial state
     drawGrid();
@@ -393,6 +406,82 @@ function drawFood(food) {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(food.type.emoji, x + GRID_SIZE / 2, y + GRID_SIZE / 2 + 1);
+}
+
+// Touch event handlers for swipe gestures
+function handleTouchStart(event) {
+    event.preventDefault();
+    const touch = event.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+}
+
+function handleTouchMove(event) {
+    event.preventDefault(); // Prevent scrolling
+}
+
+function handleTouchEnd(event) {
+    event.preventDefault();
+    if (!isGameRunning) return;
+    
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
+    
+    // Determine swipe direction
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        // Horizontal swipe
+        if (Math.abs(deltaX) > SWIPE_THRESHOLD) {
+            if (deltaX > 0 && direction.x !== -1) {
+                // Swipe right
+                nextDirection = { x: 1, y: 0 };
+            } else if (deltaX < 0 && direction.x !== 1) {
+                // Swipe left
+                nextDirection = { x: -1, y: 0 };
+            }
+        }
+    } else {
+        // Vertical swipe
+        if (Math.abs(deltaY) > SWIPE_THRESHOLD) {
+            if (deltaY > 0 && direction.y !== -1) {
+                // Swipe down
+                nextDirection = { x: 0, y: 1 };
+            } else if (deltaY < 0 && direction.y !== 1) {
+                // Swipe up
+                nextDirection = { x: 0, y: -1 };
+            }
+        }
+    }
+}
+
+// Set up on-screen control buttons
+function setupOnScreenControls() {
+    const controls = document.querySelectorAll('.control-btn');
+    controls.forEach(button => {
+        const handleControl = (e) => {
+            e.preventDefault();
+            if (!isGameRunning) return;
+            
+            const dir = button.dataset.direction;
+            switch(dir) {
+                case 'up':
+                    if (direction.y !== 1) nextDirection = { x: 0, y: -1 };
+                    break;
+                case 'down':
+                    if (direction.y !== -1) nextDirection = { x: 0, y: 1 };
+                    break;
+                case 'left':
+                    if (direction.x !== 1) nextDirection = { x: -1, y: 0 };
+                    break;
+                case 'right':
+                    if (direction.x !== -1) nextDirection = { x: 1, y: 0 };
+                    break;
+            }
+        };
+        
+        button.addEventListener('click', handleControl);
+        button.addEventListener('touchstart', handleControl);
+    });
 }
 
 // Initialize when DOM is loaded
