@@ -19,11 +19,22 @@
             
             <canvas id="gameCanvas" width="400" height="400"></canvas>
             
+            <div class="mobile-controls">
+                <div class="controls-row">
+                    <button class="control-btn" data-direction="up" aria-label="Move up">↑</button>
+                </div>
+                <div class="controls-row">
+                    <button class="control-btn" data-direction="left" aria-label="Move left">←</button>
+                    <button class="control-btn" data-direction="down" aria-label="Move down">↓</button>
+                    <button class="control-btn" data-direction="right" aria-label="Move right">→</button>
+                </div>
+            </div>
+            
             <div id="startScreen" class="overlay">
                 <div class="overlay-content">
                     <h2>The Legend of the Wyrm</h2>
                     <p>Guide the ancient Celtic wyrm through the mystical realm, collecting sacred offerings.</p>
-                    <p class="controls-info">Use arrow keys or WASD to control the wyrm</p>
+                    <p class="controls-info">Use arrow keys, WASD, swipe gestures, or on-screen buttons to control the wyrm</p>
                     <button id="startBtn" class="celtic-btn">Begin Your Quest</button>
                 </div>
             </div>
