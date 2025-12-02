@@ -1,4 +1,24 @@
 // Wyrm - A Celtic Serpent Game
+
+// Polyfill for roundRect (for older browser compatibility)
+if (!CanvasRenderingContext2D.prototype.roundRect) {
+    CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height, radius) {
+        if (typeof radius === 'number') {
+            radius = { tl: radius, tr: radius, br: radius, bl: radius };
+        }
+        this.moveTo(x + radius.tl, y);
+        this.lineTo(x + width - radius.tr, y);
+        this.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
+        this.lineTo(x + width, y + height - radius.br);
+        this.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
+        this.lineTo(x + radius.bl, y + height);
+        this.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
+        this.lineTo(x, y + radius.tl);
+        this.quadraticCurveTo(x, y, x + radius.tl, y);
+        this.closePath();
+    };
+}
+
 // Game constants
 const GRID_SIZE = 20;
 const GAME_SPEED = 150; // milliseconds between moves
