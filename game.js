@@ -458,7 +458,7 @@ function handleTouchEnd(event) {
 function setupOnScreenControls() {
     const controls = document.querySelectorAll('.control-btn');
     controls.forEach(button => {
-        button.addEventListener('click', (e) => {
+        const handleControl = (e) => {
             e.preventDefault();
             if (!isGameRunning) return;
             
@@ -477,13 +477,10 @@ function setupOnScreenControls() {
                     if (direction.x !== -1) nextDirection = { x: 1, y: 0 };
                     break;
             }
-        });
+        };
         
-        // Prevent touch delay on mobile
-        button.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            button.click();
-        });
+        button.addEventListener('click', handleControl);
+        button.addEventListener('touchstart', handleControl);
     });
 }
 

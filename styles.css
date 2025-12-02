@@ -24,7 +24,6 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 20px;
     overflow-x: hidden;
-    touch-action: pan-x pan-y;
 }
 
 .celtic-border {
@@ -218,7 +217,7 @@ body {
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    touch-action: manipulation;
+    touch-action: none;
 }
 
 .control-btn:active {
