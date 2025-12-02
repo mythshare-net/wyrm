@@ -6,7 +6,9 @@ An online Celtic folklore twist on the classic snake game. Guide an ancient Celt
 
 1. Open `index.html` in your web browser
 2. Click "Begin Your Quest" to start
-3. Use **Arrow Keys** or **WASD** to control the wyrm
+3. Control the wyrm using:
+   - **Desktop**: Arrow Keys or WASD
+   - **Mobile**: Swipe gestures or on-screen directional buttons
 4. Collect sacred offerings to grow and earn points
 5. Avoid hitting the walls or yourself!
 
@@ -50,7 +52,17 @@ wyrm/
 
 - Pure HTML5, CSS3, and JavaScript
 - HTML5 Canvas for game rendering
+- Touch and swipe controls for mobile devices
+- Responsive design with on-screen buttons
 - No external dependencies
+
+## 📱 Mobile Support
+
+The game is fully optimized for mobile devices with:
+- Touch/swipe gesture controls
+- On-screen directional buttons
+- Responsive canvas sizing
+- Touch-optimized UI elements
 
 ## 📜 License
 
