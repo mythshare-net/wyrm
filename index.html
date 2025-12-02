@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wyrm - Celtic Serpent Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="celtic-border">
+        <div class="game-container">
+            <h1 class="game-title">Wyrm</h1>
+            <p class="subtitle">A Celtic Serpent's Quest</p>
+            
+            <div class="score-display">
+                <span class="score-label">Sacred Offerings:</span>
+                <span id="score">0</span>
+            </div>
+            
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+            
+            <div id="startScreen" class="overlay">
+                <div class="overlay-content">
+                    <h2>The Legend of the Wyrm</h2>
+                    <p>Guide the ancient Celtic wyrm through the mystical realm, collecting sacred offerings.</p>
+                    <p class="controls-info">Use arrow keys or WASD to control the wyrm</p>
+                    <button id="startBtn" class="celtic-btn">Begin Your Quest</button>
+                </div>
+            </div>
+            
+            <div id="gameOverScreen" class="overlay hidden">
+                <div class="overlay-content">
+                    <h2>The Wyrm Rests</h2>
+                    <p>Your wyrm has completed its journey.</p>
+                    <p>Sacred Offerings Collected: <span id="finalScore">0</span></p>
+                    <button id="restartBtn" class="celtic-btn">Rise Again</button>
+                </div>
+            </div>
+            
+            <div class="legend">
+                <h3>Sacred Offerings</h3>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <span class="food-icon apple">🍎</span>
+                        <span>Avalon Apple (+1)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="food-icon shamrock">☘️</span>
+                        <span>Lucky Shamrock (+2)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="food-icon mistletoe">🌿</span>
+                        <span>Druid's Mistletoe (+3)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
